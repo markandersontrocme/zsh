@@ -68,9 +68,10 @@ git
 vscode
 kubectl
 kube-ps1
+z
 )
 source $ZSH/oh-my-zsh.sh
-source "/mnt/c/Users/mark/kube-ps1-master/kube-ps1.sh"
+source "/home/mark/kube-ps1/kube-ps1.sh"
 
 PROMPT='$(kube_ps1)'$PROMPT
 
@@ -101,13 +102,25 @@ KUBE_PS1_PREFIX=''
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
+EDITOR=vim
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
- alias zshconfig="vim ~/.zshrc"
-# alias ohmyzsh="code ~/.oh-my-zsh"
+alias zshconfig="vim ~/.zshrc"
+alias servoy="sudo GTK_THEME=Adwaita:light /usr/local/servoy_linux/developer/servoy"
+alias open="xdg-open"
+alias npmrc='echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc'
+alias swapCluster='swapCluster() { /home/mark/Dev/helm-charts/swapCluster $1 };swapCluster'
+alias weather='curl wttr.in/montreal'
+alias grafana='kubectl port-forward deployment/prometheus-grafana -n monitoring 3000'
 
+#To not have issues with tilix and VTE
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte-2.91.sh
+fi
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
